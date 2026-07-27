@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#854e19" id="themeColorMeta">
+  <title>Atlas de Lectura — Book Tracker</title>
+  <link rel="manifest" href="manifest.json?v=2.2">
+  <link rel="stylesheet" href="styles.css?v=2.2">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div><strong>Atlas de Lectura <span class="version-pill">v2.2 Online</span></strong><small>Book tracker interactivo</small></div>
+      </div>
+      <nav class="nav" aria-label="Secciones">
+        <button data-view="dashboard" class="active"><span>◫</span>Inicio</button>
+        <button data-view="library"><span>▤</span>Biblioteca</button>
+        <button data-view="monthly"><span>◷</span>Panel mensual</button>
+        <button data-view="expenses"><span>◎</span>Gastos</button>
+        <button data-view="series"><span>≡</span>Series</button>
+        <button data-view="reviews"><span>✎</span>Reseñas</button>
+        <button data-view="updates"><span>↻</span>Actualizaciones</button>
+        <button data-view="gallery"><span>▦</span>Galería</button>
+        <button data-view="habits"><span>⌁</span>Hábitos</button>
+        <button data-view="calendar"><span>□</span>Calendario</button>
+        <button data-view="az"><span>A</span>Reto A–Z</button>
+        <button data-view="ps"><span>50</span>Reto PS 2025</button>
+        <button data-view="setup"><span>⚙</span>Configuración</button>
+        <button data-view="diagnostics"><span>◇</span>Motor de datos</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div id="saveStatus">Guardado local</div>
+        <small>Datos privados en este navegador</small>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <button class="icon-btn mobile-only" id="menuBtn" aria-label="Abrir menú">☰</button>
+        <div class="global-search">
+          <span>⌕</span>
+          <input id="globalSearch" type="search" placeholder="Buscar título, autor, serie o género…" autocomplete="off">
+          <kbd>Ctrl K</kbd>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="Cambiar tema">◐</button>
+          <button class="btn ghost" id="importBtn">Importar</button>
+          <button class="btn ghost" id="exportBtn">Exportar</button>
+          <button class="btn ghost install-btn" id="installBtn" hidden>Instalar</button>
+          <button class="btn primary" id="quickAddBtn">+ Añadir libro</button>
+          <input id="importFile" type="file" accept="application/json" hidden>
+        </div>
+      </header>
+      <main id="app" tabindex="-1"></main>
+    </section>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebarScrim" aria-hidden="true"></div>
+  <nav class="mobile-nav" aria-label="Navegación móvil">
+    <button data-view="dashboard"><span>⌂</span>Inicio</button>
+    <button data-view="library"><span>▤</span>Biblioteca</button>
+    <button class="mobile-quick" data-action="add-session"><span>＋</span>Sesión</button>
+    <button data-view="calendar"><span>□</span>Calendario</button>
+    <button id="mobileMoreBtn"><span>☰</span>Más</button>
+  </nav>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" aria-live="polite"></div>
+  <script src="seed-data.js?v=2.2"></script>
+  <script src="app.js?v=2.2"></script>
+</body>
+</html>
