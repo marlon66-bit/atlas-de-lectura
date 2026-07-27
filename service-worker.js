@@ -1,5 +1,5 @@
-const CACHE='atlas-book-tracker-v2-2-online';
-const CORE=['./','./index.html','./styles.css?v=2.2','./app.js?v=2.2','./seed-data.js?v=2.2','./manifest.json?v=2.2','./media/app-icon.svg'];
+const CACHE='atlas-book-tracker-v2-3-online';
+const CORE=['./','./index.html','./styles.css?v=2.3','./app.js?v=2.3','./seed-data.js?v=2.3','./manifest.json?v=2.3','./media/app-icon.svg','./cover-fix.js?v=2.3'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
