@@ -1,0 +1,46 @@
+name: Publicar Atlas en GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v6
+      - name: Preparar sitio estático
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/media
+          cp index.html manifest.json service-worker.js .nojekyll _site/
+          cp media/app-icon.svg _site/media/app-icon.svg
+          cat payload/app-gz-*.b64 | base64 --decode | gzip --decompress > _site/app.js
+          cat payload/styles-gz-*.b64 | base64 --decode | gzip --decompress > _site/styles.css
+          cat payload/seed-gz-*.b64 | base64 --decode | gzip --decompress > _site/seed-data.js
+          node --check _site/app.js
+          node --check _site/service-worker.js
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+      - name: Empaquetar sitio
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
