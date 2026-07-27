@@ -28,13 +28,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site/media
-          cp index.html manifest.json service-worker.js .nojekyll _site/
+          cp index.html manifest.json service-worker.js cover-fix.js .nojekyll _site/
           cp media/app-icon.svg _site/media/app-icon.svg
           cat payload/app-gz-*.b64 | base64 --decode | gzip --decompress > _site/app.js
           cat payload/styles-gz-*.b64 | base64 --decode | gzip --decompress > _site/styles.css
           cat payload/seed-gz-*.b64 | base64 --decode | gzip --decompress > _site/seed-data.js
+          cat payload/media-gz-*.b64 | base64 --decode | gzip --decompress | tar --extract --directory _site/media
           node --check _site/app.js
           node --check _site/service-worker.js
+          node --check _site/cover-fix.js
+          test -f _site/media/image1.webp
+          test -f _site/media/image15.webp
       - name: Configurar Pages
         uses: actions/configure-pages@v5
       - name: Empaquetar sitio
