@@ -7,7 +7,7 @@
     if (!raw || /^(?:data:|blob:|https?:)/i.test(raw)) return raw;
     const match = String(raw).match(IMAGE_RE);
     if (!match) return raw;
-    return new URL(`media/${match[1]}.webp`, document.baseURI).href;
+    return window.ATLAS_COVERS?.[match[1]] || raw;
   }
 
   function repairImage(img) {
