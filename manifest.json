@@ -1,0 +1,16 @@
+{
+  "name": "Atlas de Lectura — Book Tracker",
+  "short_name": "Atlas",
+  "description": "Biblioteca, hábitos, gastos, reseñas y retos de lectura en una aplicación privada, instalable y offline.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1eb",
+  "theme_color": "#854e19",
+  "orientation": "any",
+  "lang": "es-PE",
+  "icons": [
+    {"src":"media/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
